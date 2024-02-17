@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('theme');
             $table->text('text');
             $table->foreignId('post_type_id')->constrained('post_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('author_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('reply_to')->nullable();
             $table->foreign('reply_to')
                 ->references('id')->on('posts')

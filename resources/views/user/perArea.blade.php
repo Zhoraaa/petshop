@@ -9,7 +9,7 @@
         $user = auth()->user();
     @endphp
     <div class="border border-secondary rounded m-2 p-3">
-        <h1>{{ $user->login }}</h1>
+        <h3>{{ $user->login }}</h3>
         <h4>Баланс: {{ $user->balance ?? 0 }}₽</h4>
         <form action="{{ route('changeBalance') }}" method="post">
             @csrf

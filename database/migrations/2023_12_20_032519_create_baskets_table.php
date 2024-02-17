@@ -20,7 +20,7 @@ return new class extends Migration
                 ->references('id')->on('orders')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('status')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('count');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

@@ -9,15 +9,15 @@ class ProductTypeTableSeeder extends Seeder
 {
     public function run(): void
     {
-        ProductType::factory()->create(['name' => 'Уличные светильники']);
-        ProductType::factory()->create(['name' => 'Промышленные светильники']);
-        ProductType::factory()->create(['name' => 'Офисные светильники']);
-        ProductType::factory()->create(['name' => 'Парковые опоры (светильники)']);
-        ProductType::factory()->create(['name' => 'Кронштейны и закладные']);
-        ProductType::factory()->create(['name' => 'Асуно, it-разработка ПО']);
-        ProductType::factory()->create(['name' => 'Светофорные комплексы']);
-        ProductType::factory()->create(['name' => 'Мобильное освещение']);
-        ProductType::factory()->create(['name' => 'Архитектурная подсветка']);
-        ProductType::factory()->create(['name' => 'Сопутствующие товары']);
+        ProductType::factory()->create(['name' => 'Игрушки']);
+        ProductType::factory()->create(['name' => 'Корма']);
+        ProductType::factory()->create(['name' => 'Лекарства']);
+        ProductType::factory()->create(['name' => 'Ошейники']);
+        ProductType::factory()->create(['name' => 'Миски']);
+        ProductType::factory()->create(['name' => 'Кормушки']);
+        ProductType::factory()->create(['name' => 'Аквариумы']);
+        ProductType::factory()->create(['name' => 'Клетки']);
+        ProductType::factory()->create(['name' => 'Террариумы']);
+        ProductType::factory()->create(['name' => 'Муравьиные фермы']);
     }
 }

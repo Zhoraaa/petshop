@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Letter;
-use App\Models\OurWorks;
 use App\Models\Post;
 use App\Models\PostType;
+use App\Models\Basket;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,11 +15,7 @@ class PageController extends Controller
     //
     public function home()
     {
-
-        $data['oworks'] = OurWorks::get();
-        $data['letters'] = Letter::get();
-
-        // dd($data);
+        $data = [];
 
         return view('home', compact('data'));
     }
@@ -52,5 +49,20 @@ class PageController extends Controller
         dd($data['posts']);
 
         return view('forGovernment', compact('data'));
+    }
+
+    public function basket()
+    {
+        $data['basket'] = Basket::join('products', 'baskets.product_id', '=', 'products.id')
+            ->select('baskets.id', 'baskets.product_id', 'products.name', 'products.cost', 'baskets.count')
+            ->where('orderer_id', Auth::user()->id)
+            ->where('order', NULL)
+            ->get();
+
+        $data['orders'] = Order::where('orderer_id', '=', Auth::user()->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('user.basket', compact('data'));
     }
 }

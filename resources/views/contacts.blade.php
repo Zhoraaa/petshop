@@ -11,9 +11,9 @@
     <br>
 
     <div class="w60">
-        <h1 class="bindigo-text lt-bold lt-up">
+        <h3 class="bindigo-text lt-bold lt-up">
             Контакты
-        </h1>
+        </h3>
 
         <br>
 
@@ -45,7 +45,7 @@
         </div>
         <div class="d-flex flex-wrap flex-column centering">
             <img src="./imgs/email_2787620.svg" alt="" class="contact-img">
-            <p class="contact-text">info@ledplast.ru</p>
+            <p class="contact-text">info@PetShop.ru</p>
         </div>
     </div>
 

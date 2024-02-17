@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('track_number');
-            $table->integer('price');
             $table->tinyInteger('monetized');
+            $table->foreignId('status')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('orderer_id')->constrained('users');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

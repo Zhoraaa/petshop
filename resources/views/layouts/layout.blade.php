@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ledplast - @yield('title')</title>
-    <link rel="shortcut icon" href="{{ asset('imgs/logo.svg') }}" type="image/x-icon">
+    <title>PetShop - @yield('title')</title>
+    <link rel="shortcut icon" href="{{ asset('imgs/logo.png') }}" type="image/x-icon">
     {{-- Bootstrap --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -31,14 +31,14 @@
     {{-- Local --}}
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <link href="https://fonts.cdnfonts.com/css/montserrat" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ asset('imgs/logo.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('imgs/logo.png') }}" type="image/x-icon">
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-bindigo lt-thin">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('imgs/logo.svg') }}" alt="Логотип" class="logo">
+            <img src="{{ asset('imgs/logo.png') }}" alt="Логотип" class="logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,30 +46,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                        aria-expanded="false">
-                        Каталог
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item text-white hov-gray" href="{{ @route('shop') }}">Товары</a>
-                        <a class="dropdown-item text-white hov-gray" href="#">Услуги</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                        aria-expanded="false">
-                        Статьи
-                    </a>
-                    <div class="dropdown-menu active">
-                        <a class="dropdown-item text-white hov-gray" href="{{ @route('delivery') }}">Доставка</a>
-                        <a class="dropdown-item text-white hov-gray" href="#">Гарантия</a>
-                        <a class="dropdown-item text-white hov-gray" href="{{ @route('viewPosts', ['ptype' => 'Госучреждениям']) }}">Госучреждениям</a>
-                        <a class="dropdown-item text-white hov-gray" href="{{ @route('viewPosts', ['ptype' => 'Полезная информация']) }}">Полезная информация</a>
-                    </div>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ @route('shop') }}">Товары</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ @route('about') }}">О нас</a>
+                    <a class="nav-link" href="{{ @route('forum') }}">Форум</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ @route('contacts') }}">Контакты</a>
@@ -91,15 +72,12 @@
                                 <a class="dropdown-item text-white hov-gray"
                                     href="{{ @route('usrRedaction') }}">Администрирование</a>
                             @endif
-                            @if (auth()->user()->role < 3)
-                                <a class="dropdown-item text-white hov-gray"
-                                    href="{{ @route('forum') }}">Статьи</a>
-                            @endif
                             <a class="dropdown-item text-white hov-gray" href="{{ @route('cart') }}">Корзина</a>
                             <a class="dropdown-item text-white hov-gray" href="{{ @route('user') }}">Личный кабинет</a>
                             <form action="{{ @route('logout') }}" method="POST">
                                 @csrf
-                                <button class="lt-thin bg-bindigo border-0 dropdown-item text-white hov-gray" href="#">Выход</button>
+                                <button class="lt-thin bg-bindigo border-0 dropdown-item text-white hov-gray"
+                                    href="#">Выход</button>
                             </form>
 
                     </li>
@@ -113,7 +91,7 @@
     <footer class="bg-bindigo lt-thin">
         <div class="ftr-wrapper w80">
             <div class="ftr-logo">
-                <img src="{{ asset('imgs/fullestlogo.svg') }}" alt="">
+                <img src="{{ asset('imgs/fullogo.png') }}" alt="">
             </div>
             <div class="ftr-info">
                 <div class="list m-2">
@@ -124,51 +102,30 @@
                         <a href="{{ route('shop') }}">Товары</a>
                     </div>
                     <div class="l-point lt-thin">
-                        <a href="">Услуги</a>
-                    </div>
-                    <div class="l-point lt-thin">
-                        <a href="">Электромонтаж</a>
-                    </div>
-                    <div class="l-point lt-thin">
-                        <a href="">АСУНО</a>
+                        <a href="">Приюти пушистика</a>
                     </div>
                 </div>
                 <div class="list m-2">
                     <div class="l-point lt-bold">
-                        <p>Статьи</p>
+                        <p>Сообщество</p>
                     </div>
                     <div class="l-point lt-thin">
-                        <a href="">Государственным<br>учреждениям</a>
+                        <a href="{{ route('forum') }}">Форум</a>
                     </div>
+                    @auth
+                        <div class="l-point lt-thin">
+                            <a href="{{route('postNew')}}">Написать<br>пост</a>
+                        </div>
+                    @endauth
                     <div class="l-point lt-thin">
-                        <a href="">Полезная<br>информация</a>
-                    </div>
-                    <div class="l-point lt-thin">
-                        <a href="">Наши работы</a>
-                    </div>
-                </div>
-                <div class="list m-2">
-                    <div class="l-point lt-bold">
-                        <p>О нас</p>
-                    </div>
-                    <div class="l-point lt-thin">
-                        <a href="">Вакансии</a>
-                    </div>
-                    <div class="l-point lt-thin">
-                        <a href="">Контакты</a>
-                    </div>
-                    <div class="l-point lt-thin">
-                        <a href="">История<br>компании</a>
-                    </div>
-                    <div class="l-point lt-thin">
-                        <a href="">Франшиза</a>
+                        <a href="{{route('contacts')}}">Контакты</a>
                     </div>
                 </div>
                 <div class="ftr-office-info m-2">
                     <p>г. Уфа, ул. Красина, д. 21</p>
                     <p>+7 347 266 06 78</p>
-                    <p>info@ledplast.ru</p>
-                    <p>ООО “Уральский светотехнический завод”, 2024</p>
+                    <p>pet@shop.com</p>
+                    <p>ООО “PetShop Inc.”, 2024</p>
                     <div class="ftr-soc-links lt-thin">
                         <a href=""><img src="{{ asset('imgs/vk.svg') }}" alt=""></a>
                         <a href=""><img src="{{ asset('imgs/tiktok.svg') }}" alt=""></a>

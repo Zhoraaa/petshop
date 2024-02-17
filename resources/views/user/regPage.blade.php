@@ -17,7 +17,7 @@
 
         <form action="{{ @route('signUp') }}" method="POST" class="form-auth">
             @csrf
-            <h1>Регистрация</h1>
+            <h3>Регистрация</h3>
             <div class="form-block-wrapper"><input type="text" name="login" placeholder="Ник в игре..."
                     pattern="[A-Za-z0-9_]{3,16}" required></div>
             <div class="form-block-wrapper"><input type="email" name="email" placeholder="Email адрес..." required>

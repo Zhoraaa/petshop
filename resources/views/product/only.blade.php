@@ -54,7 +54,7 @@
                 </div>
             @endif
             <div class="product-text d-flex flex-wrap flex-column m-2">
-                <h1 class="lt-bold lt-up bindigo-text">{{ $product->name }}</h1>
+                <h3 class="lt-bold lt-up bindigo-text">{{ $product->name }}</h3>
 
                 @if ($product->description != null)
                     <span class="m-2">{!! $product->description !!}</span>
@@ -81,19 +81,19 @@
         <br>
         @if ($product->advantages != null)
             <div class="w60">
-                <h1 class="lt-bold lt-up bindigo-text">Преимущества:</h1>
+                <h3 class="lt-bold lt-up bindigo-text">Преимущества:</h3>
                 <span class="m-2 bgray-text">{!! $product->advantages !!}</span>
             </div>
         @endif
         @if ($product->usability != null)
             <div class="w60">
-                <h1 class="lt-bold lt-up bindigo-text">Применение:</h1>
+                <h3 class="lt-bold lt-up bindigo-text">Применение:</h3>
                 <span class="m-2 bgray-text">{!! $product->usability !!}</span>
             </div>
         @endif
         @if ($product->parameters != null)
             <div class="w60">
-                <h1 class="lt-bold lt-up bindigo-text">Характеристики:</h1>
+                <h3 class="lt-bold lt-up bindigo-text">Характеристики:</h3>
                 <span class="m-2 bgray-text">{!! $product->parameters !!}</span>
             </div>
         @endif

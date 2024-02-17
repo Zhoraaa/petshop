@@ -11,8 +11,8 @@ class Order extends Model
 
     protected $fillable = [
         'track_number',
-        'price',
         'monetized',
-        'orderer_id'
+        'orderer_id',
+        'status'
     ];
 }

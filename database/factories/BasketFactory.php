@@ -16,7 +16,7 @@ class BasketFactory extends Factory
         return [
             'product_id' => $this->faker->randomElement(Product::get())->id,
             'orderer_id' => $this->faker->randomElement(User::get())->id,
-            'status' => 1,
+            'count' => $this->faker->randomElement([1,2,3,4]),
         ];
     }
 }

@@ -17,7 +17,7 @@
 
         <form action="{{ @route('signIn') }}" method="POST" class="form-auth">
             @csrf
-            <h1>Авторизация</h1>
+            <h3>Авторизация</h3>
             <div class="form-block-wrapper"><input type="email" name="email" placeholder="Email адрес..." required></div>
             <div class="form-block-wrapper"><input type="password" name="password" placeholder="Пароль..."
                     pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{6,32}$"required></div>

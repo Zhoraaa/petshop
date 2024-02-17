@@ -12,7 +12,7 @@ class Basket extends Model
     protected $fillable = [
         'product_id',
         'orderer_id',
-        'status'
+        'count'
     ];
 
     public function product()

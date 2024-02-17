@@ -13,7 +13,6 @@ class TestDataSeeder extends Seeder
             PostTableSeeder::class,
             ProductTableSeeder::class,
             BasketTableSeeder::class,
-            OurWorksTableSeeder::class,
         ]);
     }
 }

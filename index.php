@@ -192,13 +192,13 @@
         background-image: url(https://cp.beget.com/img/icons/new_alert/support.svg)
     }
 
-    h1, h2 {
+    h3, h2 {
       font-family: 'PT Sans Caption', Arial, sans-serif;
       font-weight: normal;
       margin: 0;
     }
 
-    h1 {
+    h3 {
       font-size: 21px;
       line-height: 30px;
     }

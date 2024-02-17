@@ -11,8 +11,13 @@
 
 @section('body')
     @auth
-        <div class="d-flex flex-wrap">
-            @if (auth()->user()->role < 3)
+        <div class="d-flex">
+            @if (!auth()->user()->banned)
+                <a href="{{ @route('postReply', ['idToReply' => $post->id]) }}">
+                    <button class="btn btn-primary m-2">Продолжить ветку</button>
+                </a>
+            @endif
+            @if (auth()->user()->id === $post->author_id || auth()->user()->role < 3)
                 <form action="{{ @route('postEdit', ['id' => $post->id]) }}" method="post">
                     @csrf
                     <button class="btn btn-secondary m-2">Редактировать пост</button>

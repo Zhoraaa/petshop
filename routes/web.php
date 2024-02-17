@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BasketController;
-use App\Http\Controllers\OurWorksController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LetterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,10 +47,14 @@ Route::post('/product/{id}/delete', [ProductController::class, "productDelete"])
 Route::post('/product/{id}/edit', [ProductController::class, "productEditor"])->name('productEdit');
 
 Route::post('/product/{id}/addToCart', [BasketController::class, "addToCart"])->middleware('auth')->name('addToCart');
-Route::get('/cart', [BasketController::class, "getBasket"])->middleware('auth')->name('cart');
+Route::get('/cart', [PageController::class, "basket"])->middleware('auth')->name('cart');
 Route::post('/cart/exclude', [BasketController::class, "basketExclude"])->middleware('auth')->name('basketExclude');
-Route::post('/cart/pay', [BasketController::class, "payBasket"])->middleware('auth')->name('payBasket');
-Route::post('/order/{id}/get', [BasketController::class, "getOrder"])->middleware('auth')->name('getOrder');
+
+Route::post('/order/new', [OrderController::class, "newOrder"])->middleware('auth')->name('newOrder');
+Route::get('/order/{track_number}', [OrderController::class, "seeOrder"])->middleware('auth')->name('seeOrder');
+Route::post('/order/{track_number}/pay', [OrderController::class, "payOrder"])->middleware('auth')->name('payOrder');
+Route::post('/order/{track_number}/get', [OrderController::class, "getOrder"])->middleware('auth')->name('getOrder');
+
 
 Route::get('/admin/usrRedaction', [AdminController::class, "usrRedaction"])->middleware('auth')->name('usrRedaction');
 Route::post('/admin/doMod/{id}', [AdminController::class, "doMod"])->middleware('auth')->name('doMod');
@@ -59,18 +62,6 @@ Route::post('/admin/undoMod/{id}', [AdminController::class, "undoMod"])->middlew
 Route::post('/admin/ban/{id}', [AdminController::class, "ban"])->middleware('auth')->name('ban');
 Route::post('/admin/unban/{id}', [AdminController::class, "unban"])->middleware('auth')->name('unban');
 
-Route::post('/ourWork/new', [OurWorksController::class, "editor"])->middleware('auth')->name('OWnew');
-Route::get('/ourWork/{id}', [OurWorksController::class, "checkWork"])->name('OWview');
-Route::post('/ourWork/{id}/edit', [OurWorksController::class, "editor"])->middleware('auth')->name('OWedit');
-Route::post('/ourWork/{id}/delete', [OurWorksController::class, "delete"])->middleware('auth')->name('OWdelete');
-Route::post('/ourWork/save', [OurWorksController::class, "save"])->middleware('auth')->name('OWsave');
-
-Route::post('/letter/new', function () { return view('letter_editor'); })->middleware('auth')->name('letterNew');
-Route::post('/letter/save', [LetterController::class, "save"])->middleware('auth')->name('letterSave');
-Route::post('/letter/{id}/delete', [LetterController::class, "delete"])->middleware('auth')->name('letterDel');
-
-Route::get('/delivery', function () { return view('delivery'); })->name('delivery'); // в карту
-Route::get('/about', function () { return view('about'); })->name('about'); // в карту
 Route::get('/contacts', function () { return view('contacts'); })->name('contacts'); // в карту
 Route::get('/file/{filePath}', [PageController::class, 'file'])->name('file');
 Route::get('/articles/{ptype}', [PageController::class, 'viewPosts'])->name('viewPosts'); // в карту

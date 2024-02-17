@@ -7,18 +7,6 @@
 @php
     $products = $data['products'];
     $types = $data['types'];
-
-    $forGrid = [
-        '1' => 'Уличные светильники',
-        'Промышленные светильники',
-        'Офисные светильники',
-        'Парковые опоры (светильники)',
-        'Кронштейны и закладные',
-        'Асуно, it-разработка ПО',
-        'Светофорные комплексы',
-        'Мобильное освещение',
-        'Архитектурная подсветка',
-    ];
 @endphp
 
 @section('body')
@@ -29,7 +17,7 @@
 
     <div class="w80 d-flex flex-wrap justify-content-between align-items-center">
         <div>
-            <h1 class="lt-bold lt-up bindigo-text">Каталог товаров</h1>
+            <h3 class="lt-bold lt-up bindigo-text">Каталог товаров</h3>
             <p class="lt-thin italic bgray-text this-catalogue" title="{{ $data['title'] }}">
                 {{ (mb_strlen($data['title']) > 45) ? mb_substr($data['title'], 0, 45) . '...' : $data['title'] }}
             </p>
@@ -46,25 +34,7 @@
             Фильтры
         </button>
     </div>
-
-    <div class="mini-catalogue">
-        <div class="grid-ctlg">
-            @foreach ($forGrid as $key => $item)
-                <a href="{{ route('shop', ['category' => $key]) }}">
-                    @csrf
-                    <div class="category-card">
-                        <div class="logo-ctg bg-bindigo centering">
-                            <img src="{{ asset('imgs/logos/' . $key . '.svg') }}" alt="">
-                        </div>
-                        <div class="category-name bgray-text text-center lt-up">
-                            {!! $item !!}
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-    </div>
-
+    
     <br>
 
     <div class="d-flex flex-wrap">
@@ -112,7 +82,7 @@
     <br>
 
     <div class="w80 d-flex flex-wrap justify-content-between align-items-center">
-        <h1 class="lt-bold lt-up bindigo-text">Товары по вашему запросу</h1>
+        <h3 class="lt-bold lt-up bindigo-text">Товары по вашему запросу</h3>
 
         <span class="bgray-text m-2">Всего позиций: {{ $data['count'] }}</span>
 
@@ -142,6 +112,7 @@
                         </h5>
                     </a>
                     <p>{{ $product->category }}</p>
+                    <p>{{ $product->cost }}₽</p>
                 </div>
                 <a href="{{ route('seeProduct', ['id' => $product->id]) }}"
                     class="btn btn-primary rounded centering-m">Подробнее</a>
