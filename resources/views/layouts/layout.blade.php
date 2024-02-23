@@ -68,7 +68,7 @@
                             Пользователь
                         </a>
                         <div class="dropdown-menu active">
-                            @if (auth()->user()->role === 1)
+                            @if (auth()->user()->role < 3)
                                 <a class="dropdown-item text-white hov-gray"
                                     href="{{ @route('usrRedaction') }}">Администрирование</a>
                             @endif

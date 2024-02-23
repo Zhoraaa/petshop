@@ -34,8 +34,9 @@ class ProductController extends Controller
             $product_id = Product::insertGetId([
                 'name' => $request->name,
                 'description' => $request->description,
-                'parameters' => $request->parameters,
                 'more_inf' => $request->more_inf,
+                'cost' => $request->cost,
+                'type' => $request->type,
             ]);
 
             if ($request->hasFile('images') && is_array($request->file('images'))) {

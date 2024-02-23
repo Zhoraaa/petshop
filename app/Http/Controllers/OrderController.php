@@ -57,17 +57,17 @@ class OrderController extends Controller
 
     }
 
-    public function payOrder($track_number)
+    public function payOrder($id)
     {
         $balance = Auth::user()->balance;
-        $basket = Basket::join('products', 'baskets.product_id', '=', 'products.id')
+        $order = Basket::join('products', 'baskets.product_id', '=', 'products.id')
             ->select('products.cost as product_cost', 'baskets.count as count')
-            ->where('orderer_id', Auth::user()->id)
+            ->where('order', $id)
             ->get();
 
         $totalCost = 0;
-        foreach ($basket as $bPoint) {
-            $totalCost = $totalCost + $bPoint->product_cost * $bPoint->count;
+        foreach ($order as $oPoint) {
+            $totalCost = $totalCost + $oPoint->product_cost * $oPoint->count;
         }
 
         if ($totalCost <= $balance) {
@@ -76,7 +76,7 @@ class OrderController extends Controller
                     'balance' => $balance - $totalCost
                 ]);
 
-            Order::where('track_number', $track_number)->update([
+            Order::where('id', $id)->update([
                 'status' => 2
             ]);
 

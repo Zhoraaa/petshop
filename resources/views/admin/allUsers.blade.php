@@ -49,17 +49,19 @@
                         <td>{{ $user->banned ? 'Забанен' : 'Обычный' }}</td>
                         <td>
                             <div class="d-flex flex-wrap">
-                                @if ($user->role === 'Покупатель' && !$user->banned)
-                                    <form action="{{ route('doMod', ['id' => $user->id]) }}" method="post">
-                                        @csrf
-                                        <button class="btn btn-success m-2">Назначить модератором</button>
-                                    </form>
-                                @endif
-                                @if ($user->role === 'Модер')
-                                    <form action="{{ route('undoMod', ['id' => $user->id]) }}" method="post">
-                                        @csrf
-                                        <button class="btn btn-warning m-2">Разжаловать</button>
-                                    </form>
+                                @if (auth()->user()->role < 2)
+                                    @if ($user->role === 'Покупатель' && !$user->banned)
+                                        <form action="{{ route('doMod', ['id' => $user->id]) }}" method="post">
+                                            @csrf
+                                            <button class="btn btn-success m-2">Назначить модератором</button>
+                                        </form>
+                                    @endif
+                                    @if ($user->role === 'Модер')
+                                        <form action="{{ route('undoMod', ['id' => $user->id]) }}" method="post">
+                                            @csrf
+                                            <button class="btn btn-warning m-2">Разжаловать</button>
+                                        </form>
+                                    @endif
                                 @endif
                                 @if (!$user->banned && $user->role != 'Админ')
                                     <form action="{{ route('ban', ['id' => $user->id]) }}" method="post">

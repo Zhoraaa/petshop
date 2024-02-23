@@ -64,12 +64,9 @@
                                             id="addToOrder_{{ $bPoint->id }}" checked>
                                         <label for="addToOrder_{{ $bPoint->id }}">Добавить к новому заказу</label>
                                     </div>
-                                    <form action="{{ route('delFromCart', ['id' => $bPoint->id]) }}" method="post">
-                                        @csrf
-                                        <button class="btn btn-danger">
+                                        <a href="{{ route('delFromCart', ['id' => $bPoint->id]) }}" class="btn btn-danger">
                                             Удалить из корзины
-                                        </button>
-                                    </form>
+                                        </a>
                                 </div>
                             </td>
                         </tr>

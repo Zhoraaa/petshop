@@ -17,9 +17,7 @@ class AdminController extends Controller
 
         $data['roles'] = DB::table('roles')
         ->where('id', '<', 1)
-        ->get();
-
-        // dd($data);        
+        ->get();      
 
         return view('admin.allUsers', compact('data'));
     }

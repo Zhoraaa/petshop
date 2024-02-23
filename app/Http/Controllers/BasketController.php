@@ -15,6 +15,9 @@ class BasketController extends Controller
             ->where([
                 'orderer_id' => auth()->user()->id,
             ])
+            ->where([
+                'order' => NULL
+            ])
             ->first();
 
         if (!$check) {

@@ -24,7 +24,7 @@
         <p>Всего позиций: {{ $orderProductsList->count() }}</p>
         <p>Всего товаров: {{ $totalProducts }}</p>
         @if ($order->status === 1)
-            <form action="{{ route('payOrder', ['track_number' => $order->track_number]) }}" method="post">
+            <form action="{{ route('payOrder', ['id' => $order->id]) }}" method="post">
                 @csrf
                 <button class="btn btn-primary m-2">
                     Оплатить заказ

@@ -39,8 +39,8 @@ Route::post('/user/new', [UserController::class, "signUp"])->name("signUp");
 Route::post('/user/auth', [UserController::class, "signIn"])->name("signIn");
 Route::post('/user/changeBalance', [UserController::class, "changeBalance"])->name("changeBalance");
 
-Route::get('/catalogue', [ProductController::class, "allProducts"])->name('shop'); // в карту
-Route::post('/product', [ProductController::class, "productEditor"])->middleware("auth")->name("productNew"); // в карту
+Route::get('/catalogue', [ProductController::class, "allProducts"])->name('shop'); 
+Route::post('/product', [ProductController::class, "productEditor"])->middleware("auth")->name("productNew"); 
 Route::post('/product/save', [ProductController::class, "productSave"])->middleware("auth")->name("productSave");
 Route::get('/product/{id}', [ProductController::class, "seeProduct"])->name('seeProduct');
 Route::post('/product/{id}/delete', [ProductController::class, "productDelete"])->name('productDelete');
@@ -48,14 +48,13 @@ Route::post('/product/{id}/edit', [ProductController::class, "productEditor"])->
 
 Route::post('/product/{id}/addToCart', [BasketController::class, "addToCart"])->middleware('auth')->name('addToCart');
 Route::get('/cart', [PageController::class, "basket"])->middleware('auth')->name('cart');
-Route::post('/cart/{id}/exclude', [BasketController::class, "delFromCart"])->middleware('auth')->name('delFromCart'); 
+Route::get('/cart/{id}/exclude', [BasketController::class, "delFromCart"])->middleware('auth')->name('delFromCart'); 
 
 Route::post('/order/new', [OrderController::class, "newOrder"])->middleware('auth')->name('newOrder');
 Route::get('/order/{track_number}', [OrderController::class, "seeOrder"])->middleware('auth')->name('seeOrder');
-Route::post('/order/{track_number}/pay', [OrderController::class, "payOrder"])->middleware('auth')->name('payOrder');
+Route::post('/order/{id}/pay', [OrderController::class, "payOrder"])->middleware('auth')->name('payOrder');
 Route::post('/order/{track_number}/del', [OrderController::class, "delOrder"])->middleware('auth')->name('delOrder');
 Route::post('/order/{track_number}/get', [OrderController::class, "getOrder"])->middleware('auth')->name('getOrder');
-
 
 Route::get('/admin/usrRedaction', [AdminController::class, "usrRedaction"])->middleware('auth')->name('usrRedaction');
 Route::post('/admin/doMod/{id}', [AdminController::class, "doMod"])->middleware('auth')->name('doMod');
@@ -63,6 +62,6 @@ Route::post('/admin/undoMod/{id}', [AdminController::class, "undoMod"])->middlew
 Route::post('/admin/ban/{id}', [AdminController::class, "ban"])->middleware('auth')->name('ban');
 Route::post('/admin/unban/{id}', [AdminController::class, "unban"])->middleware('auth')->name('unban');
 
-Route::get('/contacts', function () { return view('contacts'); })->name('contacts'); // в карту
+Route::get('/contacts', function () { return view('contacts'); })->name('contacts'); 
 Route::get('/file/{filePath}', [PageController::class, 'file'])->name('file');
-Route::get('/articles/{ptype}', [PageController::class, 'viewPosts'])->name('viewPosts'); // в карту
+Route::get('/articles/{ptype}', [PageController::class, 'viewPosts'])->name('viewPosts'); 
