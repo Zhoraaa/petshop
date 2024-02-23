@@ -23,6 +23,7 @@
         <p>Стоимость: {{ $totalCost }}</p>
         <p>Всего позиций: {{ $orderProductsList->count() }}</p>
         <p>Всего товаров: {{ $totalProducts }}</p>
+        <form action="{{ route }}" method="post"></form>
 
         <table class="table">
             <thead>

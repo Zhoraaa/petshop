@@ -35,10 +35,7 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'parameters' => $request->parameters,
-                'advantages' => $request->advantages,
-                'usability' => $request->usability,
-                'cost' => $request->cost,
-                'type' => $request->type
+                'more_inf' => $request->more_inf,
             ]);
 
             if ($request->hasFile('images') && is_array($request->file('images'))) {

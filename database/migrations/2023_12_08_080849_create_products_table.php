@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->text('parameters');
-            $table->text('advantages');
-            $table->text('usability');
+            $table->text('more_inf');
             $table->integer('cost');
             $table->foreignId('type')->constrained('product_types');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

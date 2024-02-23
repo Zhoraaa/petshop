@@ -63,12 +63,43 @@
                     <h4 class="m-2">{{ $product->cost }}₽</h4>
                 @endif
                 @auth
-                    <form action="{{ @route('addToCart', ['id' => $product->id]) }}" method="post">
-                        @csrf
-                        <button class="btn btn-primary m-2">Добавить в корзину</button>
-                    </form>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Добавить в корзину
+                    </button>
                 @endauth
             </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="{{ @route('addToCart', ['id' => $product->id]) }}" method="post" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление товара в корзину</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="count">Впишите количество необходимых товаров</label>
+                        <input type="number" min="1" class="form-control" id="count" aria-describedby="count"
+                            placeholder="0" name="count">
+                        <small id="count" class="form-text text-muted">
+                            Только натуральные целые числа.
+                        </small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button class="btn btn-primary m-2">Добавить в корзину</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -79,22 +110,10 @@
     <br>
     <div class="text-info">
         <br>
-        @if ($product->advantages != null)
+        @if ($product->more_inf != null)
             <div class="w60">
-                <h3 class="lt-bold lt-up bindigo-text">Преимущества:</h3>
-                <span class="m-2 bgray-text">{!! $product->advantages !!}</span>
-            </div>
-        @endif
-        @if ($product->usability != null)
-            <div class="w60">
-                <h3 class="lt-bold lt-up bindigo-text">Применение:</h3>
-                <span class="m-2 bgray-text">{!! $product->usability !!}</span>
-            </div>
-        @endif
-        @if ($product->parameters != null)
-            <div class="w60">
-                <h3 class="lt-bold lt-up bindigo-text">Характеристики:</h3>
-                <span class="m-2 bgray-text">{!! $product->parameters !!}</span>
+                <h3 class="lt-bold lt-up bindigo-text">Подробнее о товаре:</h3>
+                <span class="m-2 bgray-text">{!! $product->more_inf !!}</span>
             </div>
         @endif
     </div>

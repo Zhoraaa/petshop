@@ -48,7 +48,7 @@ Route::post('/product/{id}/edit', [ProductController::class, "productEditor"])->
 
 Route::post('/product/{id}/addToCart', [BasketController::class, "addToCart"])->middleware('auth')->name('addToCart');
 Route::get('/cart', [PageController::class, "basket"])->middleware('auth')->name('cart');
-Route::post('/cart/exclude', [BasketController::class, "basketExclude"])->middleware('auth')->name('basketExclude');
+Route::post('/cart/{id}/exclude', [BasketController::class, "delFromCart"])->middleware('auth')->name('delFromCart'); 
 
 Route::post('/order/new', [OrderController::class, "newOrder"])->middleware('auth')->name('newOrder');
 Route::get('/order/{track_number}', [OrderController::class, "seeOrder"])->middleware('auth')->name('seeOrder');

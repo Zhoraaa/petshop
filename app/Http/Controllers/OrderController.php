@@ -11,15 +11,16 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     //
-    public function seeOrder(Request $request) {
-        $track_number = $request->track_number; 
+    public function seeOrder(Request $request)
+    {
+        $track_number = $request->track_number;
 
         $data['order'] = Order::where('track_number', $track_number)->first();
         $data['OPList'] = Basket::join('products', 'baskets.product_id', '=', 'products.id')
-        ->select('baskets.id', 'baskets.product_id', 'products.name', 'products.cost', 'baskets.count')
-        ->where('orderer_id', Auth::user()->id)
-        ->where('order', $data['order']->id)
-        ->get();
+            ->select('baskets.id', 'baskets.product_id', 'products.name', 'products.cost', 'baskets.count')
+            ->where('orderer_id', Auth::user()->id)
+            ->where('order', $data['order']->id)
+            ->get();
 
         // dd($data['OPList']);
 
@@ -35,17 +36,25 @@ class OrderController extends Controller
 
     public function newOrder(Request $request)
     {
-        $newOrderId = Order::insertGetId([
-            'track_number' => 'TRCK_' . time(),
-            'monetized' => 0,
-            'orderer_id' => Auth::user()->id,
-            'status' => 1,
-        ]);
+        if (count($request->toArray()) > 1) {
+            $newOrderId = Order::insertGetId([
+                'track_number' => 'TRCK_' . time(),
+                'monetized' => 0,
+                'orderer_id' => Auth::user()->id,
+                'status' => 1,
+            ]);
 
-        Basket::where('order', NULL)
-            ->update(['order' => $newOrderId]);
+            foreach ($request->all() as $id => $chck) {
+                if ($id !== '_token') {
+                    Basket::where('id', $id)
+                        ->where('orderer_id', Auth::user()->id)
+                        ->update(['order' => $newOrderId]);
+                }
+            }
+            return redirect()->route('cart')->with('success', 'Заказ сформирован');
+        }
+        return redirect()->route('cart')->with('error', 'Заказ не может быть пустым');
 
-        return redirect()->route('cart')->with('success', 'Заказ сформирован');
     }
 
     public function payOrder(Request $request)

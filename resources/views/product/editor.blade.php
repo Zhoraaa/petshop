@@ -26,18 +26,8 @@
             </textarea>
         </div>
         <div class="form-block-wrapper border border-secondary rounded">
-            <textarea name="advantages" class="tinyMCE" placeholder="Описание товара">
-                {{ isset($product) ? $product->advantages : null }}
-            </textarea>
-        </div>
-        <div class="form-block-wrapper border border-secondary rounded">
-            <textarea name="usability" class="tinyMCE" placeholder="Описание товара">
-                {{ isset($product) ? $product->usability : null }}
-            </textarea>
-        </div>
-        <div class="form-block-wrapper border border-secondary rounded">
-            <textarea name="parameters" class="tinyMCE" placeholder="Описание товара">
-                {{ isset($product) ? $product->parameters : null }}
+            <textarea name="more_inf" class="tinyMCE" placeholder="Описание товара">
+                {{ isset($product) ? $product->more_inf : null }}
             </textarea>
         </div>
         <div class="form-block-wrapper border border-secondary rounded">
