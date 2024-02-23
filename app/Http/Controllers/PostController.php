@@ -73,13 +73,13 @@ class PostController extends Controller
     {
         $post = Post::find($request->id);
 
-        $reply_to = $request->idToReply;
+        $data['reply_to'] = $request->idToReply;
 
-        if ($reply_to) {
-            return view("post.editor", compact('reply_to'));
+        if ($data['reply_to']) {
+            return view("post.editor", compact('data'));
         }
 
-        return view("post.editor", compact('post'));
+        return view("post.editor", compact('data'));
     }
     public function postDelete(Request $request)
     {

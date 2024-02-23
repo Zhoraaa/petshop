@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@php
+    $reply_to = $data['reply_to'];
+@endphp
+
 @section('title')
     Редактирование поста
 @endsection
