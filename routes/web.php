@@ -53,6 +53,7 @@ Route::post('/cart/{id}/exclude', [BasketController::class, "delFromCart"])->mid
 Route::post('/order/new', [OrderController::class, "newOrder"])->middleware('auth')->name('newOrder');
 Route::get('/order/{track_number}', [OrderController::class, "seeOrder"])->middleware('auth')->name('seeOrder');
 Route::post('/order/{track_number}/pay', [OrderController::class, "payOrder"])->middleware('auth')->name('payOrder');
+Route::post('/order/{track_number}/del', [OrderController::class, "delOrder"])->middleware('auth')->name('delOrder');
 Route::post('/order/{track_number}/get', [OrderController::class, "getOrder"])->middleware('auth')->name('getOrder');
 
 

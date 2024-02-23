@@ -118,6 +118,7 @@
         @endif
     </div>
     <br>
+    @if (count($product->productMedia->toArray()) > 1)
     <div class="w60">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -148,5 +149,6 @@
             </a>
         </div>
     </div>
+    @endif
     <br>
 @endsection

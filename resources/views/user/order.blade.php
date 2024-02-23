@@ -19,12 +19,32 @@
 @section('body')
     <div class="m-2 p-2 rounded border-secondary">
         <h2>Заказ {{ $order->track_number }}</h2>
-        <p>Статус: {{ $order->status }}</p>
+        <p>Статус: {{ $order->status_text }}</p>
         <p>Стоимость: {{ $totalCost }}</p>
         <p>Всего позиций: {{ $orderProductsList->count() }}</p>
         <p>Всего товаров: {{ $totalProducts }}</p>
-        <form action="{{ route }}" method="post"></form>
-
+        @if ($order->status === 1)
+            <form action="{{ route('payOrder', ['track_number' => $order->track_number]) }}" method="post">
+                @csrf
+                <button class="btn btn-primary m-2">
+                    Оплатить заказ
+                </button>
+            </form>
+            <form action="{{ route('delOrder', ['track_number' => $order->track_number]) }}" method="post">
+                @csrf
+                <button class="btn btn-danger m-2">
+                    Расформировать заказ
+                </button>
+            </form>
+        @endif
+        @if ($order->status === 2)
+            <form action="{{ route('getOrder', ['track_number' => $order->track_number]) }}" method="post">
+                @csrf
+                <button class="btn btn-success m-2">
+                    Я получил заказ
+                </button>
+            </form>
+        @endif
         <table class="table">
             <thead>
                 <tr>

@@ -13,6 +13,6 @@ class Order extends Model
         'track_number',
         'monetized',
         'orderer_id',
-        'status'
+        'status',
     ];
 }

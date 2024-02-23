@@ -15,14 +15,14 @@ class OrderController extends Controller
     {
         $track_number = $request->track_number;
 
-        $data['order'] = Order::where('track_number', $track_number)->first();
+        $data['order'] = Order::join('statuses', 'orders.status', '=', 'statuses.id')
+        ->select('orders.*', 'statuses.name as status_text')
+        ->where('track_number', $track_number)->first();
         $data['OPList'] = Basket::join('products', 'baskets.product_id', '=', 'products.id')
             ->select('baskets.id', 'baskets.product_id', 'products.name', 'products.cost', 'baskets.count')
             ->where('orderer_id', Auth::user()->id)
             ->where('order', $data['order']->id)
             ->get();
-
-        // dd($data['OPList']);
 
         return view('user.order', compact('data'));
     }
@@ -57,10 +57,8 @@ class OrderController extends Controller
 
     }
 
-    public function payOrder(Request $request)
+    public function payOrder($track_number)
     {
-        $track_number = $request->track_number;
-
         $balance = Auth::user()->balance;
         $basket = Basket::join('products', 'baskets.product_id', '=', 'products.id')
             ->select('products.cost as product_cost', 'baskets.count as count')
@@ -84,7 +82,17 @@ class OrderController extends Controller
 
             return redirect()->route('cart')->with('success', 'Заказ оплачен');
         } else {
-            return redirect()->route('cart')->with('success', 'Недостаточно средств');
+            return redirect()->route('cart')->with('error', 'Недостаточно средств');
         }
+    }
+
+    public function delOrder($track_number) {
+        $order = Order::where('track_number', $track_number)->first();
+        Basket::where('order', $order->id)->update([
+            'order' => NULL
+        ]);
+        $order->delete();
+        
+        return redirect()->route('cart')->with('success', 'заказ успешно расформирован');
     }
 }
